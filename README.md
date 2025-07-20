@@ -1,4 +1,6 @@
 Hospital Appointment Booking Website
+
+
 This is a full-stack web application built with React (frontend) and Django (backend) that allows patients to book appointments with doctors. It supports user signup/login, doctor management, appointment scheduling, and role-based access.
 
   Features
