@@ -25,7 +25,7 @@ Signup / Login
 *Filter by patient, date, or department
 
  Tech Stack
-Layer         	Technology
+(Layer      and   	Technology)
 Frontend	     React, Axios, React Router
 Backend      	 Django, Django REST Framework
 Database	     MySQL 
