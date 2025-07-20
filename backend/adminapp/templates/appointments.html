@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Appointment List</title>
+  <style>
+    /* Same styles as before (you can keep them as-is for design) */
+    body {
+      background-color: #f8f9fa;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: #343a40;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: #343a40;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    h1 {
+      margin: 30px 0 20px 0;
+      color: #333;
+    }
+
+    .filter-section {
+      margin-bottom: 20px;
+    }
+
+    .filter-section input[type="date"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    table th, table td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      table thead {
+        display: none;
+      }
+
+      table tr {
+        margin-bottom: 15px;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 5px;
+      }
+
+      table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #f1f1f1;
+      }
+
+      table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination a {
+      color: #007bff;
+      padding: 8px 16px;
+      text-decoration: none;
+      margin: 0 4px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .pagination a.active {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .pagination a:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  {% include 'navbar.html' %}
+
+  <!-- Heading -->
+  <h1>Appointment List</h1>
+
+  <!-- Filter by Date -->   
+  <div class="filter-section">
+    <form method="GET">
+      <label for="dateFilter">Filter by Date:</label>
+      <input type="date" id="dateFilter" name="dateFilter" value="{{ request.GET.dateFilter }}">
+      <button type="submit">Filter</button>
+    </form>
+  </div>
+
+  <!-- Appointment Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Patient Name</th>
+        <th>Doctor Name</th>
+        <th>Department</th>
+        <th>Date</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if appointments %}
+        {% for appointment in appointments %}
+          <tr>
+            <td data-label="Patient Name">{{ appointment.user.name }}</td>
+            <td data-label="Doctor Name">{{ appointment.doctor.name }}</td>
+            <td data-label="Doctor Department">{{ appointment.doctor.department }}</td>
+            <td data-label="Date">{{ appointment.date|date:"d M Y" }}</td>
+            <td data-label="Time">{{ appointment.time }}</td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="4">No appointments found.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+
+</body>
+</html>

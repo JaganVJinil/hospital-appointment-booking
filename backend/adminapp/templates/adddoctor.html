@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Doctor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            background-color: white;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        form input[type="text"],
+        form input[type="number"],
+        form input[type="file"] {
+            width: 100%;
+            padding: 8px 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        form button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+
+    <div class="form-container">
+        <h2>Add New Doctor</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="department">Department</label>
+            <input type="text" id="department" name="department" required />
+
+            <label for="qualification">Qualification</label>
+            <input type="text" id="qualification" name="qualification" required />
+
+            <label for="experience">Experience (years)</label>
+            <input type="number" id="experience" name="experience" min="0" required />
+
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image" accept="image/*" required />
+
+            <button type="submit">Add Doctor</button>
+        </form>
+    </div>
+
+</body>
+</html>

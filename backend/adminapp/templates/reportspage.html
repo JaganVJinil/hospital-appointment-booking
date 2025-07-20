@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #343a40;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        /* Heading */
+        h1 {
+            margin: 30px 0 20px 0;
+            color: #333;
+        }
+
+        /* Filter section */
+        .filter-section {
+            margin-bottom: 20px;
+        }
+
+        .filter-section label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .filter-section select {
+            padding: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Responsive table */
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            table thead {
+                display: none;
+            }
+
+            table tr {
+                margin-bottom: 15px;
+                background-color: #ffffff;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                border-radius: 5px;
+                overflow: hidden;
+            }
+
+            table td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border: none;
+                border-bottom: 1px solid #f1f1f1;
+            }
+
+            table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+
+    <!-- Heading -->
+    <h1>Reports</h1>
+
+    <!-- Filter by Month -->
+    <form method="get" class="filter-section">
+        <label for="monthFilter">Filter by Month:</label>
+        <select id="monthFilter" name="monthFilter" onchange="this.form.submit()">
+            <option value="">All Months</option>
+            {% for month in months %}
+                <option value="{{ month }}" {% if month == selected_month %}selected{% endif %}>{{ month }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <!-- Report Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Most Booked Doctor</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if doctor_report %}
+                {% for doc in doctor_report %}
+                    <tr>
+                        <td data-label="Most Booked Doctor">{{ doc.doctor__name }}</td>
+                        <td data-label="Count">{{ doc.count }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="2">No appointments found for this month.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+</body>
+</html>

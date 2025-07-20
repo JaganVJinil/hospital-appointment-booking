@@ -1,0 +1,58 @@
+<!-- navbar.html -->
+<style>
+  .navbar {
+    background-color: #343a40;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content a {
+    color: #343a40;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #f1f1f1;
+  }
+</style>
+
+<div class="navbar">
+  <div class="dropdown">
+    <a href="#">List ▾</a>
+    <div class="dropdown-content">
+      <a href="{% url 'doctorlist' %}">Doctor List</a>
+      <a href="{% url 'patientlist' %}">Patient List</a>
+    </div>
+  </div>
+  <a href="{% url 'appointments' %}">Appointments</a>
+  <a href="{% url 'adminlogin' %}">Logout</a>
+  <a href="{% url 'reportspage' %}">Reports</a>
+</div>

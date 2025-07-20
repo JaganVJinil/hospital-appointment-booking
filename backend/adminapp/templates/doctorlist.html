@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .navbar {
+            background-color: #343a40;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin: 30px 0 20px 0;
+            color: #333;
+        }
+
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-section label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .filter-section select {
+            padding: 8px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        .add-doctor-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .action-links a {
+            margin-right: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .action-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .top-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            table thead {
+                display: none;
+            }
+
+            table tr {
+                margin-bottom: 15px;
+                background-color: #ffffff;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                border-radius: 5px;
+                overflow: hidden;
+            }
+
+            table td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border: none;
+                border-bottom: 1px solid #f1f1f1;
+            }
+
+            table td::before {
+                content: attr(data-label);
+                font-weight: bold;
+            }
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            color: #007bff;
+            padding: 8px 16px;
+            text-decoration: none;
+            margin: 0 4px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+            border: 1px solid #007bff;
+        }
+
+        .pagination a:hover {
+            background-color: #0056b3;
+            color: white;
+            border: 1px solid #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+   
+    {% include 'navbar.html' %}
+
+
+    
+    <h1>Doctor List</h1>
+
+   
+    <div class="top-section">
+        <div class="filter-section">
+            <form method="get">
+                <label for="departmentFilter">Filter by Department:</label>
+                <select id="departmentFilter" name="department" onchange="this.form.submit()">
+                    <option value="">All Departments</option>
+                    {% for dept in departments %}
+                        <option value="{{ dept }}" {% if dept == selected_department %}selected{% endif %}>{{ dept }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+        <a href="{% url 'adddoctor' %}" class="add-doctor-btn">Add New Doctor</a>
+    </div>
+
+    <!-- Doctor Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in page_obj %}
+            <tr>
+                <td data-label="Name">{{ doctor.name }}</td>
+                <td data-label="Department">{{ doctor.department }}</td>
+                <td data-label="Action" class="action-links">
+                    <a href="{% url 'doctorview' doctor.id %}">View</a>
+                    <a href="{% url 'editdoctor' doctor.id %}">Edit</a>
+                    <a href="{% url 'deletedoctor' doctor.id %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No doctors found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}&department={{ selected_department }}">&laquo; Previous</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            <a href="?page={{ num }}&department={{ selected_department }}" class="{% if page_obj.number == num %}active{% endif %}">{{ num }}</a>
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&department={{ selected_department }}">Next &raquo;</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

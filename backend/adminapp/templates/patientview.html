@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 700px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .detail {
+            margin: 15px 0;
+        }
+        .detail strong {
+            display: inline-block;
+            width: 120px;
+        }
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #aaa;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Patient Details</h2>
+        <div class="detail"><strong>Name:</strong> {{ patient.name }}</div>
+        <div class="detail"><strong>Email:</strong> {{ patient.email }}</div>
+        <div class="detail"><strong>DOB:</strong> {{ patient.dob }}</div>
+        <div class="detail"><strong>Gender:</strong> {{ patient.gender }}</div>
+        <div class="detail"><strong>Contact No:</strong> {{ patient.contact_no }}</div>
+        <div class="detail"><strong>Address:</strong> {{ patient.address }}</div>
+
+        <h3 style="margin-top:40px;">Appointments</h3>
+        {% if appointments %}
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Doctor</th>
+                    
+                </tr>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.time }}</td>
+                        <td>{{ appointment.doctor.name }}</td>
+                        
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No appointments found for this patient.</p>
+        {% endif %}
+
+        <div class="back-link">
+            <a href="{% url 'patientlist' %}">← Back to Patient List</a>
+        </div>
+    </div>
+</body>
+</html>
