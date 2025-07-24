@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
+import BackgroundWrapper from "./BackgroundWrapper";
 
 function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
@@ -52,6 +53,7 @@ function ChangePassword() {
   return (
     <div>
       <Navbar />
+      <BackgroundWrapper>
       <div style={styles.container}>
         <div style={styles.card}>
           <h2 style={styles.heading}>Change Password</h2>
@@ -91,7 +93,9 @@ function ChangePassword() {
           </button>
         </div>
       </div>
+      </BackgroundWrapper>
     </div>
+    
   );
 }
 

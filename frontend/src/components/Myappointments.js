@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
 import "../App.css";
+import BackgroundWrapper from "./BackgroundWrapper";
 
 function Appointments() {
   const [view, setView] = useState("upcoming");
@@ -59,6 +60,7 @@ function Appointments() {
   return (
     <div>
       <Navbar />
+      <BackgroundWrapper>
       <div className="container">
         <div className="button-group">
           <button
@@ -132,9 +134,12 @@ function Appointments() {
                 <p><strong>Status:</strong> {selectedAppointment.status || "N/A"}</p>
               )}
             </div>
+            
           </div>
+          
         )}
       </div>
+      </BackgroundWrapper>
     </div>
   );
 }

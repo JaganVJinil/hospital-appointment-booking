@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
 import '../App.css';
+import BackgroundWrapper from "./BackgroundWrapper";
 
 function DoctorList() {
   const [searchDept, setSearchDept] = useState("");
@@ -41,8 +42,10 @@ function DoctorList() {
   return (
     <div>
       <Navbar />
+      <BackgroundWrapper>
       <div className="doctor-container">
         <h2 className="doctor-heading">Available Doctors</h2>
+        
         <input
           type="text"
           placeholder="Filter by department..."
@@ -50,6 +53,7 @@ function DoctorList() {
           onChange={(e) => setSearchDept(e.target.value)}
           className="doctor-search-input"
         />
+      
 
         <div className="card-container">
           {filteredDoctors.map((doc) => (
@@ -77,7 +81,9 @@ function DoctorList() {
             <p><strong>Experience:</strong> {selectedDoctor.experience}</p>
           </div>
         </div>
+        
       )}
+      </BackgroundWrapper>
     </div>
   );
 }
