@@ -16,12 +16,20 @@ This is the **React-based frontend** of the **Hospital Appointment Booking Websi
 
 ---
 
+### 🏠 Login Page
+![Login Page](./screenshots/loginpage.png)
 
 
 ### 🏠 Home Page
 ![Home Page](./screenshots/homepage.png)
 
 
+### 🏠 DoctorList
+![DoctorList](./screenshots/dontorlist.png)
+
+
+### 🏠 Appointments
+![Appointments Page](./screenshots/appointments.png)
 
 
 
