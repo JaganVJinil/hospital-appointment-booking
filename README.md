@@ -1,43 +1,49 @@
-Hospital Appointment Booking Website
+# 🏥 Hospital Appointment Booking Website
 
+A **full-stack web application** built using **React** (frontend) and **Django** (backend) that allows patients to book appointments with doctors and provides admin capabilities to manage appointments, doctors, and users.
 
-This is a full-stack web application built with React (frontend) and Django (backend) that allows patients to book appointments with doctors. It supports user signup/login, doctor management, appointment scheduling, and role-based access.
+---
 
-  Front end Features
- Patient/User
-Signup / Login
+## ✨ Features
 
-*View available doctors
+### 👨‍⚕️ Patient/User
 
-*Book appointments (date & time)
+- 🔐 **Signup / Login**
+- 👀 **View available doctors** with profile and department
+- 📅 **Book appointments** (date & time)
+- ✅ **View upcoming & past appointments**
+- ❌ **Cancel appointments**
 
-*View upcoming & past appointments
+### 🛠️ Admin/Doctor
 
-*Cancel appointments
+- 🔐 **Login**
+- 📋 **View all appointments**
+- 🕒 **Manage doctor availability**
+- 🔍 **Filter appointments** by patient, date, or department
+- 📊 **Generate reports** (e.g., most viewed doctors)
 
-Backend Features
- Doctor/Admin
-*Login
+---
 
-*View all appointments
+## 🚀 Key Highlights
 
-*Manage availability
+- 🔐 Implemented secure **user registration and login** using token-based authentication.
+- 🧑‍⚕️ Developed a **doctor directory** with dynamic search and filters.
+- 📅 Integrated a complete **appointment booking and management** workflow.
+- 🧑‍💼 Built **admin functionalities** to oversee and control system data.
+- 📈 Created **reports and analytics** for doctors and appointment trends.
+- 🖼️ Responsive UI built with React, Axios, and styled with plain CSS/Tailwind.
 
-*Filter by patient, date, or department
+---
 
-Key Features
+## 🧩 Tech Stack
 
- - Implemented user registration and login functionality using React and backend framework.
-          - Developed a doctor directory with detailed profiles and appointment booking system.
-          - Enabled users to view and manage their appointments, including past and upcoming appointments.
-          - Implemented admin functionality for managing appointments, doctors, and users.      
-          - Created reports for most viewed doctors
+| Layer         | Technology                       |
+|---------------|----------------------------------|
+| Frontend      | React, Axios, React Router       |
+| Backend       | Django, Django REST Framework    |
+| Database      | MySQL                            |
+| Authentication| Token-Based (Django Token)       |
+| Styling       | CSS, Tailwind (optional)         |
 
- Tech Stack
-(Layer      and   	Technology)
-Frontend	     React, Axios, React Router
-Backend      	 Django, Django REST Framework
-Database	     MySQL 
-Auth	         Token-based Authentication (JWT or Django token)
-Styling        CSS, Tailwind (optional)
+---
 
