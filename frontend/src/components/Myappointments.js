@@ -103,7 +103,7 @@ function Appointments() {
               />
               <h3>{appt.doctor.name}</h3>
               <p><strong>Department:</strong> {appt.doctor.department}</p>
-              <p><strong>Date:</strong> {appt.date}</p>
+              <p><strong>Date:</strong> {appt.date.split('T')[0]}</p>
               <p><strong>Time:</strong> {appt.time}</p>
             </div>
           ))}
@@ -120,7 +120,7 @@ function Appointments() {
                 className="modal-image"
               />
               <p><strong>Department:</strong> {selectedAppointment.doctor.department}</p>
-              <p><strong>Date:</strong> {selectedAppointment.date}</p>
+              <p><strong>Date:</strong> {selectedAppointment.date.split('T')[0]}</p>
               <p><strong>Time:</strong> {selectedAppointment.time}</p>
 
               {view === "upcoming" ? (
