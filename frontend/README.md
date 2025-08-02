@@ -29,7 +29,7 @@ This is the **React-based frontend** of the **Hospital Appointment Booking Websi
 
 
 ### 📃 Appointments
-![Appointments Page](./screenshots/appointments.png)
+![Appointments Page](./screenshots/U_P_Appointments.png)
 
 
 
